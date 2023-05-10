@@ -21,6 +21,11 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
+
+localStorage.setItem('name', 'guest')
+localStorage.setItem('role', 'guest')
+localStorage.setItem('access_token', 'null')
+
 app.use(createPinia())
 app.use(router)
 app.use(vuetify)
@@ -34,9 +39,5 @@ app.use(new VueSocketIO({
         mutationPrefix: 'SOCKET_'
     },
 }))
-
-localStorage.setItem('name', 'guest')
-localStorage.setItem('role', 'guest')
-localStorage.setItem('access_token', 'null')
 
 app.mount('#app')

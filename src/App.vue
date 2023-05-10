@@ -4,8 +4,8 @@
             <v-list>
                 <v-list-item
                         prepend-icon="mdi-account"
-                        :title="authModule.getters.getName(authModule.state())"
-                        :subtitle="authModule.getters.getRole(authModule.state())"
+                        :title="store.getters['authModule/getName']"
+                        :subtitle="store.getters['authModule/getRole']"
                 >
                 </v-list-item>
             </v-list>
@@ -27,19 +27,11 @@
     </v-layout>
 </template>
 
-<script>
+<script setup>
 
-import { authModule } from "./store/modules/authModule";
-export default {
-    computed: {
-        authModule() {
-            return authModule
-        }
-    },
+import { useStore } from "vuex";
+let store = useStore();
 
-    data: () => ({
-    })
-}
 </script>
 
 <style>

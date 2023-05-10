@@ -1,17 +1,16 @@
 import {AuthApi as authApi} from "@/api/authApi";
 
-export const authModule = {
+export default {
     namespaced: true,
 
-    state() {
-        return {
+    state: {
             credentials: {
                 token: localStorage.getItem('access_token') || null,
                 name: localStorage.getItem('name') || null,
                 role: localStorage.getItem('role') || null,
                 id: localStorage.getItem('user_id') || null
             }
-        }
+
     },
 
     getters: {

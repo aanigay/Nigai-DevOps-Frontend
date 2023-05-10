@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div v-if="name === 'admin'" class="system">
-            <p class="text-xs-center">{{text}}</p>
+        <div v-if="name === 'admin'" class="mes">
+            <p class="text-xs-center">{{ text }}</p>
             <hr>
         </div>
-        <div v-else>
-        <div class="mes" :class="{owner}">
+        <div v-else class="wrap">
+            <div class="mes" :class="{owner}">
                 <small>
-                    <strong>{{name}}</strong>
+                    <strong>{{ name }}</strong>
                 </small>
-                <p>{{text}}</p>
+                <p>{{ text }}</p>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@ system {
     margin: 0 1rem;
     box-shadow: 0 1px 0 0 rgba(50, 50, 50, 0.3);
     border-radius: 4px;
-    background: #1976d2;
+    background: #80CBC4;
     position: relative;
     margin-bottom: 1rem;
 
@@ -58,7 +58,7 @@ system {
 }
 
 .owner {
-    background: #ffffff;
+    background: #eeeeee;
     color: #000000;
     align-self: flex-end;
 }
