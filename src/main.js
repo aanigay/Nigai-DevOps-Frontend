@@ -3,6 +3,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import VueSocketIO from 'vue-3-socket.io'
+import { generateUsername } from "unique-username-generator";
 
 import App from './App.vue'
 import router from './router'
@@ -21,10 +22,11 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
-
-localStorage.setItem('name', 'guest')
+localStorage.removeItem('posts')
+localStorage.setItem('name', generateUsername())
 localStorage.setItem('role', 'guest')
 localStorage.setItem('access_token', 'null')
+localStorage.setItem('posts', JSON.stringify([]))
 
 app.use(createPinia())
 app.use(router)

@@ -6,6 +6,9 @@
         </div>
         <div v-else class="wrap">
             <div class="mes" :class="{owner}">
+                <p>
+                    {{time}}
+                </p>
                 <small>
                     <strong>{{ name }}</strong>
                 </small>
@@ -23,6 +26,16 @@ export default {
         owner: {
             type: Boolean,
             default: false
+        },
+        sent_at: Number
+    },
+    computed: {
+        time() {
+            let date = new Date(this.sent_at)
+            let ho = new Intl.DateTimeFormat('ru', { hour: '2-digit' }).format(date);
+            let mi = new Intl.DateTimeFormat('ru', { minute: '2-digit' }).format(date);
+
+            return `${ho}:${mi}`
         }
     }
 };

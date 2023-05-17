@@ -1,22 +1,24 @@
 import {AuthApi as authApi} from "@/api/authApi";
+import {generateUsername} from "unique-username-generator";
 
 export default {
     namespaced: true,
 
     state: {
-            credentials: {
-                token: localStorage.getItem('access_token') || null,
-                name: localStorage.getItem('name') || null,
-                role: localStorage.getItem('role') || null,
-                id: localStorage.getItem('user_id') || null
-            }
+        credentials: {
+            token: localStorage.getItem('access_token') || null,
+            name: localStorage.getItem('name') || null,
+            role: localStorage.getItem('role') || null,
+            id: localStorage.getItem('user_id') || null
+        }
 
     },
 
     getters: {
         getRole: (state) => state.credentials.role,
         getName: (state) => state.credentials.name,
-        getId: (state) => state.credentials.id
+        getId: (state) => state.credentials.id,
+        isLoggedIn: (state) => state.credentials.role !== 'guest'
     },
 
     mutations: {
@@ -43,19 +45,28 @@ export default {
 
     actions: {
         onLogin({commit}, {name, password}) {
-            authApi.login(name, password).then((res) => {
+            return authApi.login(name, password).then((res) => {
                 commit('setToken', res.data.access_token);
                 commit('setName', res.data.name);
                 commit('setRole', res.data.role);
                 commit('setId', res.data.user_id);
-                console.log(res.data)
+                console.log('store: login', res.data)
+                return true
+            }).catch(() => {
+                console.log('CATCHED')
+                return false
             })
+        },
+        onLogout({commit}) {
+            commit('setRole', 'guest');
+            commit('setName', generateUsername())
         },
         onRegister({commit}, {name, password}) {
             authApi.register(name, password).then((res) => {
                 commit('setToken', res.data.access_token);
                 commit('setName', res.data.name);
                 commit('setRole', res.data.role);
+                commit('setId', res.data.user_id);
             })
         }
     }

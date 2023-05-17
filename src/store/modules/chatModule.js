@@ -5,7 +5,7 @@ export default {
         messages: []
     },
     getters: {
-        getMessages: (state) => state.messages,
+        getMessages: (state) => state.messages
     },
     mutations: {
         SOCKET_msg(state, message) {

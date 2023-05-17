@@ -1,7 +1,6 @@
 <template>
     <v-row xs12>
-        <v-text-field label="Введите сообщение" outline v-model="text" @keydown.enter="send(text)"/>
-        <v-btn @click="clear()"></v-btn>
+        <v-text-field class="" label="Введите сообщение" outline v-model="text" @keydown.enter="send(text)"/>
     </v-row>
 </template>
 
@@ -28,13 +27,15 @@ export default {
     },
     methods: {
         send(message) {
+            if (message === '') {
+                return
+            }
             this.$socket.emit('msg', JSON.stringify({
                 text: message,
-                name: this.getName()
+                name: this.getName(),
+                sent_at: Date.now()
             }))
-        },
-        clear() {
-            localStorage.removeItem('messages')
+            this.text = ''
         }
     }
 }

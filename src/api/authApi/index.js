@@ -17,5 +17,18 @@ export const AuthApi = {
         const url = '/register';
         const data = {name, password};
         return LoginAPIInstance.post(url, data);
+    },
+
+    getUserById(id) {
+        const url = '/getById';
+        return LoginAPIInstance.get(url, {
+            params: {
+                id: id
+            }
+        })
+    },
+
+    getAll() {
+        return LoginAPIInstance.get('/get-all')
     }
 }
